@@ -1,0 +1,35 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+
+    </head>
+	<body>
+		
+<h1>Visitor Data</h1>
+<h4><li><a href="{% url 'back' %}">Home</a></li></h4>
+
+	<hr>  <!-- hr tag for horizontal line-->
+	{% for i in signups %}
+
+	Name : {{i.fname}}<br>
+	Last Name : {{i.lname}}<br>
+	Mobile : {{i.mobile}}<br>
+	Address : {{i.address}}<br>
+	Gender : {{i.gender}}<br>
+	Company Name : {{i.cname}}<br>
+	Purpose : {{i.purpose}}<br>
+	tosee : {{i.tosee}}<br><hr>
+
+	{% endfor %}
+
+
+		
+		
+	</body>
+</html>
+{% endblock %}

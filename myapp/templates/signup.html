@@ -1,0 +1,173 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+	
+
+
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">Visitor Enrollment</h3>
+						<ul class="breadcrumb-tree">
+							<li><a href="{% url 'back' %}">Home</a></li>
+							
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							<div class="section-title">
+								
+							</div>
+							{% if msg %}
+								<b style="color: blue;">{{msg}}</b>
+							{% endif %}
+							
+							<form name="signup" method="post" action="{% url 'signup' %}" enctype="multipart/form-data">
+								{% csrf_token %}
+								
+							<div class="form-group">
+								
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="fname" placeholder="First Name">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="lname" placeholder="Last Name">
+							</div>
+							<div class="form-group">
+								<!--<input class="input" type="email" name="email" placeholder="Email" id="email">-->
+								<span id="email_error" style="color: red;"></span>
+							</div>
+							<div class="form-group">
+								<input class="input" type="tel" name="mobile" placeholder="mobile">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="address" placeholder="Address">
+							</div>
+							<tr align="center">
+							<td>Gender</td>
+							<td><input type="radio" value="male" name="gender">Male
+							<td><input type="radio" value="female" name="gender">Female
+							</td>
+							<br><br>
+							
+							
+							<div class="form-group">
+								<input class="input" type="text" name="cname" placeholder="Company Name">
+							</div>
+							<div class="form-group">
+								<input class="input" type="tel" name="purpose" placeholder="Purpose">
+							</div>
+							<div class="form-group">
+								
+								<input class="input" type="text" name="tosee" placeholder="To See">
+							</div>
+							<div class="form-group">
+								
+								<input class="input" type="text" name="todepartment" placeholder="To Department">
+							</div>
+							<div class="form-group">
+								
+								
+							</div>
+							<a href="{% url 'photo_capture' %}"><button type="button" class="primary-btn order-submit">Take Photo</button></a>
+							<button type="submit" class="primary-btn order-submit">Submit </button>
+							<a href="{% url 'back' %}"><button type="button" class="primary-btn order-submit">Back</button></a><br><br>
+							
+						</div>
+					
+					</div>
+
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- NEWSLETTER -->
+		<div id="newsletter" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="newsletter">
+							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
+							<form>
+								<input class="input" type="email" placeholder="Enter Your Email">
+								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+							</form>
+							<ul class="newsletter-follow">
+								<li>
+									<a href="#"><i class="fa fa-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-instagram"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-pinterest"></i></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /NEWSLETTER -->
+		<script>
+          $("#email").change(function(){
+            var email=$(this).val();
+
+            $.ajax({
+              url: '/ajax/validate_email/',
+              data: {
+                'email': email
+              },
+              dataType: 'json',
+              success: function (data) {
+                if (!data.is_taken) {
+                  document.getElementById("email").style.border="5px solid red";
+                  document.getElementById("email_error").innerHTML="Email Id Already Registered";
+                }else{
+                  document.getElementById("email").style.border="5px solid green";
+                  document.getElementById("email_error").innerHTML="";
+                }
+              }
+            });
+          });
+
+        </script>
+
+	
+
+	</body>
+</html>
+{% endblock %}
