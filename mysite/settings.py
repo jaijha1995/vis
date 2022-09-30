@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'mysite.urls'
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 TEMPLATES = [
     {
@@ -81,6 +84,13 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+EMAIL_USE_TLS = True  
+EMAIL_HOST = 'smtp.gmail.com'  
+EMAIL_PORT = 587  
+EMAIL_HOST_USER = 'irfan.iit003@gmail.com'  
+EMAIL_HOST_PASSWORD = '*********'  
 
 
 # Password validation

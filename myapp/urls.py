@@ -11,5 +11,7 @@ urlpatterns = [
     path('photo_capture/',views.photo_capture,name='photo_capture'),
     path('visitor_view/',views.visitor_view,name='visitor_view'),
     path('visitor_exit/',views.visitor_exit,name='visitor_exit'),
+    path('mail',views.mail , name="mail"),
+    path('<id>/update', views.update_view ),
     
 ]

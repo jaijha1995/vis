@@ -1,5 +1,17 @@
 from django.shortcuts import render,redirect
 from.models import User,Signup
+from django.core.mail import send_mail
+from django.http import HttpResponse  
+from mysite import settings
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
+from django.shortcuts import (get_object_or_404,
+                              render,
+                              HttpResponseRedirect)
+ 
+# relative import of forms
+from .models import Signup
+from .forms import SignupForm
 
 # Create your views here.
 
@@ -118,5 +130,39 @@ def visitor_exit(request):
 		signups=Signup.objects.all()
 		return render(request,'visitor_exit.html',{'signups':signups})
 
+
+def mail(request):  
+    subject = "Greetings"  
+    msg     = "Congratulations for your success"  
+    to      = "irfan.sssit@gmail.com"  
+    res     = send_mail(subject, msg, settings.EMAIL_HOST_USER, [to])  
+    if(res == 1):  
+        msg = "Mail Sent Successfuly"  
+    else:  
+        msg = "Mail could not sent"  
+    return HttpResponse(msg)
+
+
+def update_view(request, id):
+    # dictionary for initial data with
+    # field names as keys
+    context ={}
+ 
+    # fetch the object related to passed id
+    obj = get_object_or_404(Signup, id = id)
+ 
+    # pass the object as instance in form
+    form = SignupForm(request.POST or None, instance = obj)
+ 
+    # save the data from the form and
+    # redirect to detail_view
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect("/"+id)
+ 
+    # add form dictionary to context
+    context["form"] = form
+ 
+    return render(request, "update_view.html", context)
 
 
