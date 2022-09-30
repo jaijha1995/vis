@@ -37,6 +37,7 @@ class Signup(models.Model):
 	mobile=models.PositiveIntegerField()
 	address=models.TextField()
 	gender=models.CharField(max_length=100)
+	#entry=models.CharField(max_length=100)
 	cname=models.CharField(max_length=100)
 	purpose=models.CharField(max_length=100)
 	tosee=models.CharField(max_length=100)
@@ -48,3 +49,4 @@ class Signup(models.Model):
 
 	def __str__(self):
 		return self.fname+" "+self.lname
+
