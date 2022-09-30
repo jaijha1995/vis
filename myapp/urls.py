@@ -10,5 +10,6 @@ urlpatterns = [
     path('new_password/',views.new_password,name='new_password'),
     path('photo_capture/',views.photo_capture,name='photo_capture'),
     path('visitor_view/',views.visitor_view,name='visitor_view'),
+    path('visitor_exit/',views.visitor_exit,name='visitor_exit'),
     
 ]

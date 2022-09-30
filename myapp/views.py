@@ -47,12 +47,13 @@ def signup(request):
 				mobile=request.POST['mobile'],
 				address=request.POST['address'],
 				gender=request.POST['gender'],
+				entry=request.POST['entry'],
 				cname=request.POST['cname'],
 				purpose=request.POST['purpose'],
 				tosee=request.POST['tosee'],
 				todepartment=request.POST['todepartment'],
 
-
+					
 
 			)
 		msg="Visitor Enrollment Successfully"
@@ -108,6 +109,14 @@ def visitor_view(request):
 	else:
 		signups=Signup.objects.all()#.order_by('-id')[:3]
 		return render(request,'visitor_view.html',{'signups':signups})
+
+def visitor_exit(request):
+	if request.method=="POST":
+		signups=Signup.objects.all()
+		return render(request,'visitor_exit.html' ,{'msg':msg,'signups':signups})
+	else:
+		signups=Signup.objects.all()
+		return render(request,'visitor_exit.html',{'signups':signups})
 
 
 
