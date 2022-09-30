@@ -1,5 +1,12 @@
+from email.policy import default
+from secrets import choice
+from turtle import position
 from django.db import models
 from django.utils import timezone
+
+
+	
+
 
 # Create your models here.
 class User(models.Model):
@@ -18,6 +25,12 @@ class User(models.Model):
 		return self.fname+" "+self.lname
 
 class Signup(models.Model):
+
+	status = (
+	("Entry" , "Entry"),
+	("Exit" , "Exit"),
+	)
+
 	fname=models.CharField(max_length=100)
 	lname=models.CharField(max_length=100)
 	email=models.EmailField()
@@ -30,6 +43,7 @@ class Signup(models.Model):
 	todepartment=models.CharField(max_length=100)
 	date=models.DateTimeField(default=timezone.now)
 	made_on = models.DateTimeField(auto_now_add=True)
+	current_status = models.CharField(max_length=10, choices=status , default="Entry")
 	
 
 	def __str__(self):
