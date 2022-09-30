@@ -130,6 +130,7 @@ def visitor_exit(request):
 		signups=Signup.objects.all()
 		return render(request,'visitor_exit.html',{'signups':signups})
 
+<<<<<<< HEAD
 
 def mail(request):  
     subject = "Greetings"  
@@ -164,5 +165,7 @@ def update_view(request, id):
     context["form"] = form
  
     return render(request, "update_view.html", context)
+=======
+>>>>>>> 4cf596334833d8f42134eeb57e76c228b8d55c5f
 
 
