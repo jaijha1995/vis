@@ -14,6 +14,8 @@
 <h4><li><a href="{% url 'back' %}">Home</a></li></h4>
 
 	<hr>  <!-- hr tag for horizontal line-->
+	<form name="signup" method="post" action="{% url 'edit_exit' %}" enctype="multipart/form-data">
+		{% csrf_token %}
 	{% for i in signups %}
 
 	Name : {{i.fname}}<br>
@@ -24,10 +26,14 @@
 	Status : {{i.current_status}}<br>
 	Company Name : {{i.cname}}<br>
 	Purpose : {{i.purpose}}<br>
-	tosee : {{i.tosee}}<br>
-	<a class="btn btn-primary" href="{% url 'edit_exit' %}">Edit</a>
+	tosee : {{i.tosee}}<br><br>
+	<td>Entry Status</td>
+	<!--<td><input type="radio" value="in" name="entry">In-->
+	<td><input type="radio" value="exit" name="entry">Exit
+	</td><br><br>
+	<button type="submit" class="primary-btn order-submit">Submit </button>
 	<hr>
-
+ 
 	{% endfor %}
 
 

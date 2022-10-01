@@ -59,7 +59,7 @@ def signup(request):
 				mobile=request.POST['mobile'],
 				address=request.POST['address'],
 				gender=request.POST['gender'],
-				entry=request.POST['entry'],
+				#entry=request.POST['entry'],
 				cname=request.POST['cname'],
 				purpose=request.POST['purpose'],
 				tosee=request.POST['tosee'],
@@ -166,4 +166,13 @@ def update_view(request, id):
  
     return render(request, "update_view.html", context)
 
+def edit_exit(request):
+	if request.method=="POST":
+		signups=Signup.objects.all()
+		msg="Visitor Exit Successfully"
+		return render(request,'edit_exit.html' ,{'msg':msg,'signups':signups})
+	else:
+		signups=Signup.objects.all()
+		msg="Old Password does Not Matched"
+		return render(request,'edit_exit.html',{'signups':signups})
 
