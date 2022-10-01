@@ -13,7 +13,9 @@ urlpatterns = [
     path('visitor_exit/',views.visitor_exit,name='visitor_exit'),
     path('mail',views.mail , name="mail"),
     path('<id>/update', views.update_view ),
-    path('edit_exit/',views.edit_exit,name='edit_exit'),
+    path('edit_exit/<int:id>',views.edit_exit,name='edit_exit'),
+    path('exit_user/<int:pk>',views.exit_user,name='exit_user'),
+    
 
     
 ]

@@ -166,13 +166,26 @@ def update_view(request, id):
  
     return render(request, "update_view.html", context)
 
-def edit_exit(request):
+def edit_exit(request,pk):
 	if request.method=="POST":
-		signups=Signup.objects.all()
+		signups=Signup.objects.filter("current_status"=="Entry")
 		msg="Visitor Exit Successfully"
 		return render(request,'edit_exit.html' ,{'msg':msg,'signups':signups})
 	else:
 		signups=Signup.objects.all()
 		msg="Old Password does Not Matched"
 		return render(request,'edit_exit.html',{'signups':signups})
+
+def exit_user(request,pk):
+	all_in_user=Signup.objects.filter(current_status="Entry")
+	if request.method=="POST":
+		signups=Signup.objects.get(id=pk)
+		print(signups)
+		signups.current_status="Exit"
+		signups.save()
+		all_user=Signup.objects.filter(current_status="Entry")
+		msg="Visitor Exit Successfully"
+		return render(request,'visitor_exit.html' ,{'msg':msg,'signups':all_user})
+	else:
+		return render(request,'visitor_exit.html',{'signups':all_in_user})
 

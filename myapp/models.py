@@ -26,10 +26,10 @@ class User(models.Model):
 
 class Signup(models.Model):
 
-	status = (
-	("Entry" , "Entry"),
-	("Exit" , "Exit"),
-	)
+	#status = (
+	#("Entry" , "Entry"),
+	#("Exit" , "Exit"),
+	 #)
 
 	fname=models.CharField(max_length=100)
 	lname=models.CharField(max_length=100)
@@ -44,7 +44,7 @@ class Signup(models.Model):
 	todepartment=models.CharField(max_length=100)
 	date=models.DateTimeField(default=timezone.now)
 	made_on = models.DateTimeField(auto_now_add=True)
-	current_status = models.CharField(max_length=10, choices=status , default="Entry")
+	current_status = models.CharField(max_length=10, default="Entry")
 	
 
 	def __str__(self):

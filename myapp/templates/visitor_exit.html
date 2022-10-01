@@ -12,10 +12,10 @@
 		
 <h1>Visitor Data</h1>
 <h4><li><a href="{% url 'back' %}">Home</a></li></h4>
-
-	<hr>  <!-- hr tag for horizontal line-->
-	{% for i in signups %}
-
+<hr>  <!-- hr tag for horizontal line-->
+{% for i in signups %}
+<form action="{% url 'exit_user' i.id %}" method="post">
+	{% csrf_token %}
 	Name : {{i.fname}}<br>
 	Last Name : {{i.lname}}<br>
 	Mobile : {{i.mobile}}<br>
@@ -25,9 +25,9 @@
 	Company Name : {{i.cname}}<br>
 	Purpose : {{i.purpose}}<br>
 	tosee : {{i.tosee}}<br>
-	<a class="btn btn-primary" href="{% url 'edit_exit' %}">Edit</a>
+	<button type="submit" class="primary-btn order-submit">Exit </button>
 	<hr>
-
+</form>
 	{% endfor %}
 
 
