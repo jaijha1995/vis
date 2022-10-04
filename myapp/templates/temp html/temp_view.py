@@ -14,6 +14,7 @@ from django.shortcuts import (get_object_or_404,
 # relative import of forms
 from .models import Signup
 from .forms import SignupForm
+import cv2
 
 # Create your views here.
 
@@ -119,14 +120,18 @@ def photo_capture(request):
 def visitor_view(request):
 	if request.method=="POST":
 		signups=Signup.objects.all()#.order_by('-id')[:3]
-		return render(request,'visitor_view.html' ,{'signups':signups})
+		return render(request,'visitor_view.html' ,{'msg':msg,'signups':signups})
 	else:
 		signups=Signup.objects.all()#.order_by('-id')[:3]
 		return render(request,'visitor_view.html',{'signups':signups})
 
 def visitor_exit(request):
-	all_user=Signup.objects.filter(current_status="Entry")
-	return render(request,'visitor_exit.html',{'signups':all_user})
+	if request.method=="POST":
+		signups=Signup.objects.all()
+		return render(request,'visitor_exit.html' ,{'msg':msg,'signups':signups})
+	else:
+		signups=Signup.objects.all()
+		return render(request,'visitor_exit.html',{'signups':signups})
 
 
 
@@ -189,6 +194,47 @@ def exit_user(request,pk):
 
 
 
+def camera(request):
+    cam = cv2.VideoCapture(0)
+
+    cv2.namedWindow('python webcam screenshot app')
+
+    # let's assume the number of images gotten is 0
+    img_counter = 0
+
+    # while loop
+    while True:
+        # intializing the frame, ret
+        ret, frame = cam.read()
+        # if statement
+        if not ret:
+            print('failed to grab frame')
+            break
+        # the frame will show with the title of test
+        cv2.imshow('test', frame)
+        #to get continuous live video feed from my laptops webcam
+        k  = cv2.waitKey(1)
+        # if the escape key is been pressed, the app will stop
+        if k%256 == 27:
+            print('escape hit, closing the app')
+            break
+        # if the spacebar key is been pressed
+        # screenshots will be taken
+        elif k%256  == 32:
+            # the format for storing the images scrreenshotted
+            img_name = f'opencv_frame_{img_counter}'
+            # saves the image as a png file
+            cv2.imwrite(img_name, frame)
+            print('screenshot taken')
+            # the number of images automaticallly increases by 1
+            img_counter += 1
+
+    # release the camera
+    cam.release()
+
+    # stops the camera window
+    cam.destoryAllWindows()
+
 def forgot_password(request):
 	if request.method=="POST":
 		try:
@@ -206,15 +252,8 @@ def forgot_password(request):
 	else:
 		return render(request,'send_email.html')
 
-def send_email(request,pk):
+def send_email(request):
 	if request.method=="POST":
-		signups=Signup.objects.get(id=pk)
-		subject = 'Visitor Details'
-		message = f"{signups.fname}\n{signups.lname}\n{signups.mobile}\n{signups.address}\n{ssignups.gender}\n{signups.cname}\{signups.purpose}\n{signups.tosee} "
-		email_from = settings.EMAIL_HOST_USER
-		recipient_list = [request.POST['email']]
-		send_mail( subject, message, email_from, recipient_list )
-		return render(request,'send_email.html',{'signups':signups})
+		return render(request,'send_email.html')
 	else:
-		signups=Signup.objects.get(id=pk)
-		return render(request,'send_email.html',{'signups':signups})
+		return render(request,'send_email.html')

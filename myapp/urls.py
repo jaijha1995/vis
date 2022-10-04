@@ -11,11 +11,15 @@ urlpatterns = [
     path('photo_capture/',views.photo_capture,name='photo_capture'),
     path('visitor_view/',views.visitor_view,name='visitor_view'),
     path('visitor_exit/',views.visitor_exit,name='visitor_exit'),
-    path('mail',views.mail , name="mail"),
+    path('mail/',views.mail , name="mail"),
+    # path('camera/',views.camera , name="camera"),
     path('<id>/update', views.update_view ),
     path('edit_exit/<int:id>',views.edit_exit,name='edit_exit'),
     path('exit_user/<int:pk>',views.exit_user,name='exit_user'),
-    
+    path('forgot_password/',views.forgot_password,name='forgot_password'),
+    path('send_email/<int:pk>',views.send_email,name='send_email'),
+   
+   
 
     
 ]

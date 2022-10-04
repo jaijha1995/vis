@@ -29,9 +29,24 @@
 	Purpose : {{i.purpose}}<br>
 	tosee : {{i.tosee}}<br>
 	
+	<!--<select name="email">
+		<option>---To E-Mail---</option>
+		<option value="it@exemedpharma.com">Amit Patel-IT</option>
+		<option value="amitpatel.sai@gmail.com">Amit Patel-GMAIL</option>
+	</select>
+	<button type="submit" class="primary-btn order-submit">Send E-Mail </button>-->
+
+	<!--<div class="form-group">
+		<input class="input" type="email" name="send_email" placeholder="Email">
+	</div>
 	
-		<a href="{% url 'send_email' i.id %}"><button type="button" class="primary-btn order-submit">Send Mail</button></a>
+	
+	<button type="submit" class="primary-btn order-submit">Send mail</button>
+	
+</div>-->
 	<button type="submit" class="primary-btn order-submit">Exit </button>
+
+	<a href="{% url 'send_email' %}"><button type="button" class="primary-btn order-submit">Send Mail</button></a>
 	
 	<hr size="25px">
 </form>
